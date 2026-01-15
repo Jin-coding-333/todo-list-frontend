@@ -1,15 +1,37 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme inline {
+  /* Custom Color Palette */
+  /* Slate colors */
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-slate-300: #CBD5E1;
+  --color-slate-400: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-800: #1E293B;
+  --color-slate-900: #0F172A;
+
+  /* Violet colors */
+  --color-violet-100: #EDE9FE;
+  --color-violet-600: #7C3AED;
+
+  /* Rose/Pink color */
+  --color-rose-500: #F43F5E;
+
+  /* Lime/Green color */
+  --color-lime-300: #BEF264;
+
+  /* Amber/Orange color */
+  --color-amber-800: #92400E;
+
+  /* Font Family */
+  --font-family-nanum: "NanumSquare", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-family-sans: var(--font-family-nanum);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --background: #ffffff;
+  --foreground: #0F172A;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +44,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "NanumSquare", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
