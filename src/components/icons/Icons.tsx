@@ -72,8 +72,8 @@ const iconMap: Record<
     viewBox: "0 0 16 16",
     render: () => (
       <>
-        <path d="M2 8L14 8" stroke="#64748B" strokeWidth="2" strokeLinecap="round" />
-        <path d="M8 14L8 2" stroke="#64748B" strokeWidth="2" strokeLinecap="round" />
+        <path d="M2 8L14 8" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <path d="M8 14L8 2" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
       </>
     ),
   },
