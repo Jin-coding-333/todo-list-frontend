@@ -1,37 +1,40 @@
 "use client";
 
-import { useState } from "react";
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { TodoSection } from "@/components/landing/TodoSection";
 import { DoneSection } from "@/components/landing/DoneSection";
+import { useTodos, useCreateTodo, useUpdateTodo, useDeleteTodo } from "@/hooks/useTodo";
+import Loading from "@/app/loading";
 
 export default function Home() {
-  // 데모용 초기 상태 (나중에 API 연동 시 제거)
-  const [todos, setTodos] = useState([
-    { id: "1", title: "비타민 챙겨 먹기", isCompleted: false },
-    { id: "2", title: "맥주 마시기", isCompleted: false },
-    { id: "3", title: "운동하기", isCompleted: false },
-    { id: "4", title: "은행 다녀오기", isCompleted: true },
-    { id: "5", title: "비타민 또 먹기", isCompleted: true },
-  ]);
+  const { data: todos = [], isLoading } = useTodos();
+  const { mutate: createTodo } = useCreateTodo();
+  const { mutate: updateTodo } = useUpdateTodo();
+  const { mutate: deleteTodo } = useDeleteTodo();
 
   const todoItems = todos.filter((item) => !item.isCompleted);
   const doneItems = todos.filter((item) => item.isCompleted);
 
-  const handleToggle = (id: string) => {
-    setTodos((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, isCompleted: !item.isCompleted } : item))
-    );
+  const handleToggle = (id: string | number, isCompleted: boolean) => {
+    updateTodo({
+      itemId: id,
+      payload: { isCompleted: !isCompleted },
+    });
   };
 
   const handleAdd = (title: string) => {
-    const newTodo = {
-      id: Math.random().toString(36).substr(2, 9),
-      title,
-      isCompleted: false,
-    };
-    setTodos((prev) => [newTodo, ...prev]);
+    createTodo({ name: title });
   };
+
+  const handleDelete = (id: string | number) => {
+    if (confirm("정말 삭제하시겠습니까?")) {
+      deleteTodo(id);
+    }
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,8 +44,22 @@ export default function Home() {
 
         {/* 메인 콘텐츠 영역 (반응형 그리드) */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-6">
-          <TodoSection items={todoItems} onToggle={handleToggle} />
-          <DoneSection items={doneItems} onToggle={handleToggle} />
+          <TodoSection
+            items={todoItems}
+            onToggle={(id) => {
+              const item = todoItems.find((i) => String(i.id) === String(id));
+              if (item) handleToggle(id, item.isCompleted);
+            }}
+            onDelete={handleDelete}
+          />
+          <DoneSection
+            items={doneItems}
+            onToggle={(id) => {
+              const item = doneItems.find((i) => String(i.id) === String(id));
+              if (item) handleToggle(id, item.isCompleted);
+            }}
+            onDelete={handleDelete}
+          />
         </div>
       </div>
     </div>
