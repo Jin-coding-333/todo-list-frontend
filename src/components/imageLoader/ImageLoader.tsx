@@ -30,8 +30,17 @@ export const ImageLoader = forwardRef<HTMLDivElement, ImageLoaderProps>(
     // 파일 변경 핸들러
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
-      if (file && onFileSelect) {
-        onFileSelect(file);
+      if (file) {
+        // 5MB 제한 (5 * 1024 * 1024 bytes)
+        if (file.size > 5 * 1024 * 1024) {
+          alert("파일 크기는 5MB 이하여야 합니다.");
+          e.target.value = ""; // 초기화
+          return;
+        }
+
+        if (onFileSelect) {
+          onFileSelect(file);
+        }
       }
       // 같은 파일 재선택 가능하도록 초기화
       e.target.value = "";
@@ -59,7 +68,7 @@ export const ImageLoader = forwardRef<HTMLDivElement, ImageLoaderProps>(
       >
         {src ? (
           <div className="relative h-full w-full">
-            <img src={src} alt={alt} className="h-full w-full object-contain" />
+            <img src={src} alt={alt} className="h-full w-full object-cover" />
             {onRemove && !disabled && (
               <button
                 type="button"
