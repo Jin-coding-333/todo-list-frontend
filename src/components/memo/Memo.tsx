@@ -61,33 +61,6 @@ export const Memo = forwardRef<HTMLDivElement, MemoProps>(
           backgroundPosition: "0 48px", // "Memo" 헤더 영역(48px) 뒤부터 선이 시작되도록 함
         }}
       >
-        {/* 메모 컴포넌트 전용 스크롤바 스타일 (진한 노란색 핸들, 투명 배경, 매우 얇은 너비) */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          #memo-scroll-area::-webkit-scrollbar {
-            width: 3px !important;
-            display: block !important;
-          }
-          #memo-scroll-area::-webkit-scrollbar-track {
-            background-color: transparent !important;
-          }
-          #memo-scroll-area::-webkit-scrollbar-thumb {
-            background-color: #FDE68A !important; /* 요청하신 특정 노란색 */
-            border-radius: 10px !important;
-          }
-          #memo-scroll-area::-webkit-scrollbar-thumb:hover {
-            background-color: #FACC15 !important;
-          }
-          /* Firefox 지원 */
-          #memo-scroll-area {
-            scrollbar-width: thin;
-            scrollbar-color: #FDE68A transparent;
-          }
-        `,
-          }}
-        />
-
         {/* 헤더 - Memo */}
         <div className="flex h-12 items-center justify-center text-lg font-bold text-[#92400E]">
           Memo
