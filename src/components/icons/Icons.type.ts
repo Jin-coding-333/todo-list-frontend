@@ -5,7 +5,8 @@ export type IconName =
   | "empty-circle"
   | "edit"
   | "plus-white"
-  | "plus-gray";
+  | "plus-gray"
+  | "image-placeholder";
 
 export interface IconsProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
