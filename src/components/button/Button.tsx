@@ -61,9 +61,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         className={cn(
           // 기본 스타일
-          "inline-flex items-center justify-center gap-2 font-bold transition-all duration-200",
+          "inline-flex cursor-pointer items-center justify-center gap-2 font-bold transition-all duration-200",
           "focus:outline-none active:scale-95",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:transform-none",
+          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:transform-none disabled:active:scale-100",
           // Variant 스타일
           variantStyles[variant],
           // 테두리 제거
