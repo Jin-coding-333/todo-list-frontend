@@ -1,6 +1,9 @@
+import { TodoItem } from "@/api/todo/types";
+
 export interface DoneSectionProps {
-  items?: any[]; // 임시 타입, 실제 데이터 연동 시 수정 예정
-  onToggle?: (id: string) => void;
+  items?: TodoItem[];
+  onToggle?: (id: string | number) => void;
+  onDelete?: (id: string | number) => void;
   className?: string;
 }
 
@@ -10,7 +13,8 @@ export interface LandingHeaderProps {
 }
 
 export interface TodoSectionProps {
-  items?: any[]; // 임시 타입, 실제 데이터 연동 시 수정 예정
-  onToggle?: (id: string) => void;
+  items?: TodoItem[];
+  onToggle?: (id: string | number) => void;
+  onDelete?: (id: string | number) => void;
   className?: string;
 }
