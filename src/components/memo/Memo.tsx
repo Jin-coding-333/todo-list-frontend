@@ -39,7 +39,7 @@ export const Memo = forwardRef<HTMLDivElement, MemoProps>(
         ref={ref}
         className={cn(
           "relative",
-          "h-[311px] w-[588px]",
+          "h-[311px] w-full lg:w-[588px]",
           "rounded-3xl",
           "bg-[#FFFEE8]", // 연한 노란색 배경
           disabled && "cursor-not-allowed opacity-50",
