@@ -26,6 +26,8 @@ export const LandingHeader = ({ onAdd, className }: LandingHeaderProps) => {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         onKeyDown={(e) => {
+          // 한글 IME 조합 중에는 Enter 이벤트 무시 (마지막 음절 중복 방지)
+          if (e.nativeEvent.isComposing) return;
           if (e.key === "Enter") handleAdd();
         }}
       />
