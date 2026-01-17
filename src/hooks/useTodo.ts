@@ -37,11 +37,12 @@ export const useCreateTodo = () => {
 };
 
 // 할 일 수정 훅
-export const useUpdateTodo = (itemId: string | number) => {
+export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (payload: UpdateTodoRequest) => todoApi.updateItem(itemId, payload),
-    onSuccess: () => {
+    mutationFn: ({ itemId, payload }: { itemId: string | number; payload: UpdateTodoRequest }) =>
+      todoApi.updateItem(itemId, payload),
+    onSuccess: (_, { itemId }) => {
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
       queryClient.invalidateQueries({ queryKey: todoKeys.detail(itemId) });
     },
